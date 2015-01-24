@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Narra Core. If not, see <http://www.gnu.org/licenses/>.
 #
-# Authors:
+# Authors: Michal Mocnak <michal@marigan.net>
 #
 
 lib = File.expand_path('../lib', __FILE__)
@@ -27,8 +27,8 @@ require 'narra/speech/version'
 Gem::Specification.new do |spec|
   spec.name          = "narra-speech"
   spec.version       = Narra::Speech::VERSION
-  spec.authors       = [""]
-  spec.email         = [""]
+  spec.authors       = ["Michal Mocnak"]
+  spec.email         = ["info@narra.eu"]
   spec.summary       = %q{Speech To Text}
   spec.description   = %q{Speech To Text Generator using AT&T Speech API to transcribe audio tracks}
   spec.homepage      = "http://www.narra.eu"
