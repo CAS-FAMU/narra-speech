@@ -20,10 +20,9 @@
 #
 
 source 'https://rubygems.org'
-source 'http://lprod.code-api-att.com:8808'
 
 # Specify your gem's dependencies in narra-youtube.gemspec
 gemspec
 
 gem 'narra-core', git: 'https://github.com/CAS-FAMU/narra-core.git'
-gem 'rest-client', :source => 'http://lprod.code-api-att.com:8808/'
+gem 'att-codekit', git: 'https://github.com/attdevsupport/codekit-ruby.git'
