@@ -53,12 +53,16 @@ module Narra
         @temporary_raw = Narra::Tools::Settings.storage_temp + '/' + @item._id.to_s + '_speech_raw'
         @temporary_convert = []
         @chunks_duration = 5
+        # progress
+        set_progress(0.05)
         # download
         File.open(@temporary_raw, 'wb') do |file|
           file.write @item.audio_proxy.body
         end
         # get ffmpeg object
         audio = FFMPEG::Movie.new(@temporary_raw)
+        # progress
+        set_progress(0.10)
         # return audio
         if audio.valid?
           # calculate steps
@@ -70,6 +74,8 @@ module Narra
             # transcode
             audio.transcode(@temporary_convert[step][:file], '-ac 1 -t ' + @chunks_duration.to_s + ' -ss ' + @temporary_convert[step][:in].to_s)
           end
+          # progress
+          set_progress(0.40)
           # return
           return @temporary_convert
         else
@@ -84,6 +90,8 @@ module Narra
         @temporary_convert.each do |chunk|
           FileUtils.rm_f(chunk[:file])
         end
+        # progress
+        set_progress(0.95)
       end
 
       def convert_speech_to_text(chunks)
@@ -98,6 +106,8 @@ module Narra
         token = clientcred.createToken('SPEECH')
         # Create the service for interacting with the Speech API.
         speech = Att::Codekit::Service::SpeechService.new(fqdn, token)
+        # progress
+        set_progress(0.60)
         # iterate over chunks
         chunks.each do |audio|
           # Convert the content of the audio file to text.
@@ -105,6 +115,8 @@ module Narra
           # add metadata
           add_meta(name: 'subtitle-' + audio[:in].to_s, value: response.nbest[0].result, marks: [{in: audio[:in].to_f, out: audio[:out].to_f}]) unless response.nil? || response.status != 'OK'
         end
+        # progress
+        set_progress(0.90)
       end
     end
   end
