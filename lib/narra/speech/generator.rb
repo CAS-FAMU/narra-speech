@@ -103,7 +103,7 @@ module Narra
           # Convert the content of the audio file to text.
           response = speech.toText(audio[:file])
           # add metadata
-          add_meta(name: 'subtitle-' + audio[:in].to_s, content: response.nbest[0].result, marks: [{in: audio[:in].to_f, out: audio[:out].to_f}]) unless response.nil? || response.status != 'OK'
+          add_meta(name: 'subtitle-' + audio[:in].to_s, value: response.nbest[0].result, marks: [{in: audio[:in].to_f, out: audio[:out].to_f}]) unless response.nil? || response.status != 'OK'
         end
       end
     end
