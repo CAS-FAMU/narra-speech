@@ -29,8 +29,8 @@ module Narra
   module Speech
     class Generator < Narra::SPI::Generator
 
-      @identifier = :speech
-      @title = 'Speech To Text'
+      @identifier = :att_speech
+      @title = 'AT&T Speech To Text'
       @description = 'Speech To Text Generator using AT&T Speech API to transcribe audio tracks'
 
       def self.valid?(item_to_check)
@@ -52,7 +52,7 @@ module Narra
         # temporary files
         @temporary_raw = Narra::Tools::Settings.storage_temp + '/' + @item._id.to_s + '_speech_raw'
         @temporary_convert = []
-        @chunks_duration = 5
+        @chunks_duration = 30
         # progress
         set_progress(0.05)
         # download
@@ -113,7 +113,7 @@ module Narra
           # Convert the content of the audio file to text.
           response = speech.toText(audio[:file])
           # add metadata
-          add_meta(name: 'transcript_' + audio[:in].to_s, value: response.nbest[0].result, marks: [{in: audio[:in].to_f, out: audio[:out].to_f}]) unless response.nil? || response.status != 'OK'
+          add_meta(name: 'transcription_' + audio[:in].to_s, value: response.nbest[0].result, marks: [{in: audio[:in].to_f, out: audio[:out].to_f}]) unless response.nil? || response.status != 'OK'
         end
         # progress
         set_progress(0.90)

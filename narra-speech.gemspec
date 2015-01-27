@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.version       = Narra::Speech::VERSION
   spec.authors       = ["Michal Mocnak"]
   spec.email         = ["info@narra.eu"]
-  spec.summary       = %q{Speech To Text}
+  spec.summary       = %q{AT&T Speech To Text}
   spec.description   = %q{Speech To Text Generator using AT&T Speech API to transcribe audio tracks}
   spec.homepage      = "http://www.narra.eu"
   spec.license       = "GPL-3.0"
